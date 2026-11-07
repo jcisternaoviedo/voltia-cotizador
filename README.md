@@ -1,5 +1,7 @@
 # Cotizador Eléctrico — PWA para cotizar en terreno, ejecutar y cobrar
 
+**App publicada:** https://jcisternaoviedo.github.io/voltia-cotizador/ — se abre en Chrome del Android y se instala con ⋮ → "Instalar app". Para actualizarla: subir `VERSION` en `sw.js`, hacer commit y `git push`; GitHub Pages publica en uno o dos minutos.
+
 App web instalable (PWA), HTML + CSS + JavaScript vanilla, sin backend ni compilación. Los datos viven solo en el celular (IndexedDB) y la app funciona sin señal.
 
 ## 1. Razonamiento del flujo y decisiones clave
