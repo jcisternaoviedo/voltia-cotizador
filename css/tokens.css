@@ -1,0 +1,59 @@
+/* =====================================================================
+   tokens.css — Sistema visual en UN solo lugar. Cambiar aquí cambia
+   toda la app sin tocar las pantallas.
+   ===================================================================== */
+:root {
+  /* Marca */
+  --c-primario: #0E4A5C;
+  --c-primario-texto: #FFFFFF;
+  --c-primario-hover: #0A3846;
+
+  /* Texto y superficies */
+  --c-texto: #1A1A1A;
+  --c-texto-2: #4A4F52;
+  --c-fondo: #FFFFFF;
+  --c-superficie: #F3F5F6;
+  --c-borde: #D5DADD;
+
+  /* Estados (fondo / texto) — mismo significado en toda la app */
+  --c-enviar-bg: #FAEEDA;   --c-enviar-tx: #633806;   /* Por enviar */
+  --c-segui-bg: #E6F1FB;    --c-segui-tx: #0C447C;    /* Seguimiento / programado */
+  --c-cobrar-bg: #FCEBEB;   --c-cobrar-tx: #791F1F;   /* Por cobrar */
+  --c-listo-bg: #EAF3DE;    --c-listo-tx: #27500A;    /* Listo / pagado */
+  --c-alerta-ico: #E0A800;  /* amarillo: SOLO íconos de alerta */
+  --c-error: #A61B1B;
+
+  /* Tipografía */
+  --f-familia: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-total: 32px;
+  --f-titulo: 20px;
+  --f-cuerpo: 17px;
+  --f-etiqueta: 14px;
+  --f-peso-normal: 400;
+  --f-peso-medio: 500;
+
+  /* Interacción */
+  --toque-min: 48px;
+  --boton-principal: 56px;
+  --radio: 12px;
+  --radio-sm: 8px;
+  --esp: 16px;
+  --sombra: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Modo oscuro opcional (Ajustes) */
+[data-theme="oscuro"] {
+  --c-primario: #3A9AB5;
+  --c-primario-texto: #06222B;
+  --c-primario-hover: #4FB0CB;
+  --c-texto: #F1F3F4;
+  --c-texto-2: #C3C9CC;
+  --c-fondo: #121516;
+  --c-superficie: #1D2224;
+  --c-borde: #3A4246;
+  --c-enviar-bg: #4A3110;   --c-enviar-tx: #FBDDB0;
+  --c-segui-bg: #10304F;    --c-segui-tx: #CFE5FA;
+  --c-cobrar-bg: #4D1818;   --c-cobrar-tx: #FAD3D3;
+  --c-listo-bg: #213A10;    --c-listo-tx: #D6EDBD;
+  --c-error: #FF8A8A;
+}

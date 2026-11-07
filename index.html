@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0E4A5C">
+  <meta name="description" content="Cotiza en terreno, envía por WhatsApp, ejecuta y cobra.">
+  <title>Voltia Service · Cotizador</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app"><main><p class="chico">Cargando…</p></main></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="check-ok" aria-hidden="true"><div class="circulo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+  </div></div>
+  <!-- jsPDF incluido localmente (funciona sin conexión) -->
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
