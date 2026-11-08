@@ -122,7 +122,7 @@ El neto es round(357.300 / 1,19) = 300.252 y el IVA se calcula por diferencia, p
 - [ ] Tocar el borrador retoma en el paso donde quedó. Agregar 5 ítems del catálogo y ver el total en vivo.
 - [ ] En el paso 3, alternar Factura y Boleta: el total no cambia y la vista interna sí.
 - [ ] "Enviar por WhatsApp": la primera vez pide tus datos, se genera el PDF y se abre WhatsApp con el archivo y el texto.
-- [ ] Ajustes → Exportar respaldo descarga un JSON. Importarlo restaura todo.
+- [ ] Ajustes → "Respaldar ahora" (o la tarjeta de aviso en Pendientes) abre "Compartir": mandarlo a tu propio WhatsApp o a Drive. "Importar respaldo" con ese archivo restaura todo.
 
 **Etapa 2 — fotos, plantillas, historial**
 - [ ] Tomar 2 fotos con nota y ver que aparecen en la galería y en el anexo del PDF.

@@ -8,6 +8,7 @@ import { clp, fechaCorta, telBonito } from '../util.js';
 import { calcularPendientes, cargarCotizacion, cambiarEstado, guardarCotizacion, faltantes, crearOrden } from '../cotizaciones.js';
 import { abrirWa, textoSeguimiento, textoRecordatorioPago } from '../whatsapp.js';
 import { totales } from '../cotizaciones.js';
+import { hacerRespaldo } from '../respaldo.js';
 
 const ESTILO = {
   enviar: ['e-enviar', 'file'], segui: ['e-segui', 'clock'], trabajo: ['e-segui', 'tool'],
@@ -36,9 +37,10 @@ export async function pantallaInicio() {
     </div>`;
 
   if (p.respaldoVencido) {
-    html += `<button class="tarjeta destacada" data-ir="#/ajustes?respaldo=1">
+    // Un toque: crea el respaldo y abre "Compartir" (WhatsApp, Drive, correo) sin pasar por Ajustes.
+    html += `<button class="tarjeta destacada" id="b-respaldar">
       <span class="ico-estado e-neutro"><span class="alerta-ico">${icono('alert')}</span></span>
-      <span class="cuerpo"><div class="nombre">Haz un respaldo</div><div class="detalle">${p.ultimoRespaldo ? 'Último hace más de una semana' : 'Aún no tienes respaldo de tus datos'}</div></span>
+      <span class="cuerpo"><div class="nombre">Haz un respaldo</div><div class="detalle">${p.ultimoRespaldo ? 'Último hace más de una semana' : 'Aún no tienes respaldo de tus datos'} · un toque y lo mandas a tu WhatsApp o Drive</div></span>
       <span class="etiqueta e-neutro">Respaldar</span></button>`;
   }
 
@@ -113,6 +115,16 @@ export async function pantallaInicio() {
 
   $$('[data-ir]').forEach((b) => (b.onclick = () => ir(b.dataset.ir)));
   document.getElementById('btn-nueva').onclick = () => ir('#/rapida');
+  const bResp = document.getElementById('b-respaldar');
+  if (bResp) bResp.onclick = async () => {
+    bResp.disabled = true;
+    try {
+      const r = await hacerRespaldo();
+      if (r === 'cancelado') { aviso('Respaldo cancelado'); bResp.disabled = false; return; }
+      checkOk(); aviso(r === 'compartido' ? 'Respaldo enviado' : 'Respaldo descargado');
+      pantallaInicio();
+    } catch (e) { console.error(e); aviso('No se pudo crear el respaldo'); bResp.disabled = false; }
+  };
 
   $$('[data-seguir]', main).forEach((b) => (b.onclick = async () => {
     const { cot, cliente } = await cargarCotizacion(b.dataset.seguir);

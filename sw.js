@@ -2,7 +2,7 @@
 // sw.js — Service worker: guarda la app completa para usarla sin señal.
 // Al publicar cambios, sube VERSION para que los teléfonos se actualicen.
 // =====================================================================
-const VERSION = 'cotizador-v4';
+const VERSION = 'cotizador-v5';
 const ARCHIVOS = [
   './', './index.html', './manifest.webmanifest',
   './css/tokens.css', './css/app.css',
@@ -10,7 +10,7 @@ const ARCHIVOS = [
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/emblema.png', './icons/emblema.svg',
   './js/app.js', './js/calc.js', './js/config.js', './js/config-defaults.js', './js/cotizaciones.js',
   './js/db.js', './js/envio.js', './js/fotos.js', './js/icons.js', './js/pdf.js', './js/seed.js',
-  './js/ui.js', './js/util.js', './js/whatsapp.js',
+  './js/ui.js', './js/util.js', './js/whatsapp.js', './js/respaldo.js',
   './js/screens/ajustes.js', './js/screens/asistente.js', './js/screens/catalogo.js', './js/screens/cobro.js',
   './js/screens/comun.js', './js/screens/detalle.js', './js/screens/historial.js', './js/screens/inicio.js',
   './js/screens/orden.js', './js/screens/rapida.js', './js/screens/informe.js',

@@ -2,12 +2,13 @@
 // Ajustes: datos del negocio, tasas, precios, seguimiento, tema y
 // respaldo (exportar / importar JSON).
 // =====================================================================
-import { pintar, ir, h, $, $$, aviso, checkOk, descargar, hoja, cerrarHoja } from '../ui.js';
+import { pintar, ir, h, $, $$, aviso, checkOk, hoja, cerrarHoja } from '../ui.js';
 import { icono } from '../icons.js';
 import { getConfig, setConfig, reemplazarConfig } from '../config.js';
-import { exportarTodo, importarTodo, setMeta, getMeta } from '../db.js';
+import { importarTodo, getMeta } from '../db.js';
+import { hacerRespaldo } from '../respaldo.js';
 import { pedirDatosNegocio } from '../envio.js';
-import { fecha, fechaISO, telBonito } from '../util.js';
+import { fecha, telBonito } from '../util.js';
 import { aplicarTema } from '../app.js';
 
 export async function pantallaAjustes(params) {
@@ -26,10 +27,10 @@ export async function pantallaAjustes(params) {
       <div class="seccion-titulo">Respaldo</div>
       <div class="panel" id="respaldo">
         <div>Último respaldo: <b>${ultimo ? fecha(ultimo) : 'nunca'}</b></div>
-        <p class="chico">Guarda el archivo en Google Drive o envíatelo por WhatsApp. Incluye fotos.</p>
+        <p class="chico">Un toque: se abre "Compartir" para mandarlo a tu WhatsApp, a Google Drive o al correo. Incluye fotos.</p>
         <div class="fila-btns">
-          <button class="btn btn-primario" id="b-exp">${icono('download')}Exportar respaldo</button>
-          <label class="btn">${icono('upload')}Importar<input type="file" accept="application/json,.json" id="b-imp" hidden></label></div>
+          <button class="btn btn-primario" id="b-exp">${icono('send')}Respaldar ahora</button>
+          <label class="btn">${icono('upload')}Importar respaldo<input type="file" accept=".txt,.json,text/plain,application/json" id="b-imp" hidden></label></div>
       </div>
 
       <div class="seccion-titulo">Tus datos (salen en el PDF)</div>
@@ -79,12 +80,13 @@ export async function pantallaAjustes(params) {
   }));
 
   $('#b-exp').onclick = async () => {
+    const b = $('#b-exp'); b.disabled = true;
     try {
-      const json = await exportarTodo(getConfig());
-      descargar(new Blob([JSON.stringify(json)], { type: 'application/json' }), `respaldo-cotizador-${fechaISO()}.json`);
-      await setMeta('ultimoRespaldo', Date.now());
-      checkOk(); aviso('Respaldo exportado'); pantallaAjustes(params);
-    } catch (e) { console.error(e); aviso('No se pudo exportar el respaldo'); }
+      const r = await hacerRespaldo();
+      if (r === 'cancelado') aviso('Respaldo cancelado');
+      else { checkOk(); aviso(r === 'compartido' ? 'Respaldo enviado' : 'Respaldo descargado'); pantallaAjustes(params); }
+    } catch (e) { console.error(e); aviso('No se pudo crear el respaldo'); }
+    b.disabled = false;
   };
   $('#b-imp').onchange = async (e) => {
     const archivo = e.target.files[0]; if (!archivo) return;
